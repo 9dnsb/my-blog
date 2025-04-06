@@ -14,6 +14,13 @@ import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { CommentForm } from '@/components/CommentForm'
+
+type Comment = {
+  name: string
+  comment: string
+  createdAt?: string | null
+}
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -69,8 +76,27 @@ export default async function Post({ params: paramsPromise }: Args) {
               docs={post.relatedPosts.filter((post) => typeof post === 'object')}
             />
           )}
+          {post.comments && post.comments.length > 0 && (
+            <div className="mt-12 max-w-[48rem] mx-auto">
+              <h3 className="text-2xl font-bold mb-4">Comments</h3>
+              <div className="flex flex-col gap-6">
+                {post.comments.map((comment: Comment, index: number) => (
+                  <div key={index} className="border p-4 rounded">
+                    <p className="font-semibold">{comment.name}</p>
+                    <p className="text-gray-700">{comment.comment}</p>
+                    <p className="text-xs text-gray-400">
+                      {comment.createdAt
+                        ? new Date(comment.createdAt).toLocaleString()
+                        : 'Just now'}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
+      {post.slug && <CommentForm slug={post.slug} />}
     </article>
   )
 }

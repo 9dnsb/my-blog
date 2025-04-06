@@ -217,6 +217,31 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
+    {
+      name: 'comments',
+      type: 'array',
+      label: 'Comments',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'comment',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'createdAt',
+          type: 'date',
+          admin: {
+            readOnly: true,
+          },
+          defaultValue: () => new Date(),
+        },
+      ],
+    },
     ...slugField(),
   ],
   hooks: {

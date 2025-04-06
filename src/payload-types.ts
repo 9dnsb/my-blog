@@ -248,6 +248,14 @@ export interface Post {
         name?: string | null;
       }[]
     | null;
+  comments?:
+    | {
+        name: string;
+        comment: string;
+        createdAt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1140,6 +1148,14 @@ export interface PostsSelect<T extends boolean = true> {
     | {
         id?: T;
         name?: T;
+      };
+  comments?:
+    | T
+    | {
+        name?: T;
+        comment?: T;
+        createdAt?: T;
+        id?: T;
       };
   slug?: T;
   slugLock?: T;
