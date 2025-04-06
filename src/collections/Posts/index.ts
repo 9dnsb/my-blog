@@ -102,6 +102,14 @@ export const Posts: CollectionConfig<'posts'> = {
               label: false,
               required: true,
             },
+            {
+              name: 'markdownContent',
+              type: 'textarea',
+              label: 'Markdown Content',
+              admin: {
+                description: 'Optional: Write your post in Markdown if you prefer.',
+              },
+            },
           ],
           label: 'Content',
         },

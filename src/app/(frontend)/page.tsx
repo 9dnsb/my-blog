@@ -2,6 +2,12 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Everyday GPT',
+  description: 'How I use ChatGPT in real life',
+}
 
 export default async function Home() {
   const payload = await getPayload({ config: configPromise })

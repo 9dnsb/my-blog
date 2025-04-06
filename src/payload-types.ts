@@ -230,6 +230,10 @@ export interface Post {
     };
     [k: string]: unknown;
   };
+  /**
+   * Optional: Write your post in Markdown if you prefer.
+   */
+  markdownContent?: string | null;
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -1132,6 +1136,7 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
   content?: T;
+  markdownContent?: T;
   relatedPosts?: T;
   categories?: T;
   meta?:

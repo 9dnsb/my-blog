@@ -15,6 +15,7 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { CommentForm } from '@/components/CommentForm'
+import { marked } from 'marked'
 
 type Comment = {
   name: string
@@ -69,7 +70,16 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
+          <div className="max-w-[48rem] mx-auto">
+            {post.markdownContent ? (
+              <div
+                className="prose mx-auto"
+                dangerouslySetInnerHTML={{ __html: marked(post.markdownContent) }}
+              />
+            ) : (
+              <RichText data={post.content} enableGutter={false} />
+            )}
+          </div>
           {post.relatedPosts && post.relatedPosts.length > 0 && (
             <RelatedPosts
               className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
